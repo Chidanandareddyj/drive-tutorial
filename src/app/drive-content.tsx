@@ -8,12 +8,17 @@ import { Button } from "~/components/ui/button";
 import { FileRow, FolderRow } from "./file-row";
 import type { files_tables, folders_tables } from "~/server/db/schema";
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { UploadButton } from "~/components/uploadthing";
+import { useRouter } from "next/navigation";
 
 export default function Drivecontents(props: {
   files: (typeof files_tables.$inferSelect)[];
   folders: (typeof folders_tables.$inferSelect)[];
   parents: (typeof folders_tables.$inferSelect)[];
 }) {
+
+
+  const navigate=useRouter();
   // const [currentFolder, setCurrentFolder] = useState<number>(1); // Start at root folder with id 1
 
   // const getCurrentFiles = () => {
@@ -105,6 +110,7 @@ export default function Drivecontents(props: {
             ))}
           </ul>
         </div>
+        <UploadButton endpoint="imageUploader" onClientUploadComplete={() => navigate.refresh()} onUploadError={(error: Error) => alert(`ERROR! ${error.message}`)} />
       </div>
     </div>
   );

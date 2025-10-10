@@ -35,3 +35,20 @@ export const QUERIES = {
     return db.select().from(fileSchema).where(eq(fileSchema.parent, folderID));
   },
 };
+
+export const Mutations = {
+  createFile: async function (input: {
+    file: {
+      name: string;
+      size: number;
+      url: string;
+    };
+    userid: string;
+  }) {
+    return db.insert(fileSchema).values({
+      ...input.file,
+      size: input.file.size.toString(),
+      parent: 1,
+    });
+  },
+};

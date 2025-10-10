@@ -3,7 +3,7 @@ import "server-only";
 import { int, bigint, text, singlestoreTable, index } from "drizzle-orm/singlestore-core";
 
 
-export const files = singlestoreTable("files_table", {
+export const files_tables = singlestoreTable("files_table", {
   id:int("id").primaryKey().autoincrement(),
   name: text("name").notNull(),
   size: text("size").notNull(),
@@ -14,7 +14,7 @@ export const files = singlestoreTable("files_table", {
   return [index('parent_index').on(t.parent)]
 });
 
-export const folders = singlestoreTable("folders_table", {
+export const folders_tables = singlestoreTable("folders_table", {
   id:int("id").primaryKey().autoincrement(),
   name: text("name").notNull(),
 

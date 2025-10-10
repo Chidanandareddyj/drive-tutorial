@@ -1,7 +1,7 @@
 import React from 'react'
 import { db } from '~/server/db'
 import { mockFiles,mockFolders } from '~/lib/mock-data'
-import { files, folders } from '~/server/db/schema'
+import { files_tables, folders_tables } from '~/server/db/schema'
 import { mock } from 'node:test'
 
 
@@ -12,7 +12,7 @@ const page = () => {
       <form action={async()=>{
         "use server"
         // const users = await db.user.findMany()
-        const folderinsert=await db.insert(folders).values(
+        const folderinsert=await db.insert(folders_tables).values(
 
             mockFolders.map((folder,index)=>({
                 id: index+1,
@@ -21,7 +21,7 @@ const page = () => {
             }))
         )
         console.log("folders", folderinsert)
-        const fileinsert=await db.insert(files).values(
+        const fileinsert=await db.insert(files_tables).values(
 
             mockFiles.map((file,index)=>({
                 id: index+1,
